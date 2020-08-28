@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">AAD_Practice_Project</string>
     <string name="gads_logo">gads logo</string>
+    <string name="leaderboard">LEADERBOARD</string>
+    <string name="submit">Submit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skill_iq_badge">Skill Iq badge</string>
+    <string name="top_learner_badge">Top Learner Badge</string>
 </resources>
