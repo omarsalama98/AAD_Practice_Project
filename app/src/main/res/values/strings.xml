@@ -1,3 +1,4 @@
 <resources>
-    <string name = "app_name">AAD_Practice_Project</string>
+    <string name="app_name">AAD_Practice_Project</string>
+    <string name="gads_logo">gads logo</string>
 </resources>
