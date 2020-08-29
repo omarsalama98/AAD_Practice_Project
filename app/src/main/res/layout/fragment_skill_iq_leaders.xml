@@ -4,6 +4,6 @@
     android:id="@+id/skill_iq_leaders_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SkillIqLeaders">
+    tools:context=".fragments.SkillIqLeadersFragment">
 
 </androidx.recyclerview.widget.RecyclerView>

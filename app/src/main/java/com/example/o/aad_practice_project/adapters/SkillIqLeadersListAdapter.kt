@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.o.aad_practice_project.R
-import com.example.o.aad_practice_project.model.Learner
+import com.example.o.aad_practice_project.model.SkillIqLearner
 
-class SkillIqLeadersListAdapter(private val learners: ArrayList<Learner>) :
+class SkillIqLeadersListAdapter(private val learners: ArrayList<SkillIqLearner>) :
     RecyclerView.Adapter<SkillIqLeadersListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -24,7 +24,7 @@ class SkillIqLeadersListAdapter(private val learners: ArrayList<Learner>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = learners[position].name
         val mDetails: String =
-            learners[position].hours.toString() + " skill IQ Score, " + learners[position].country
+            learners[position].score.toString() + " skill IQ Score, " + learners[position].country
         holder.details.text = mDetails
 
     }

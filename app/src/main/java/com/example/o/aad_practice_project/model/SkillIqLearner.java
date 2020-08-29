@@ -3,14 +3,14 @@ package com.example.o.aad_practice_project.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Learner {
+public class SkillIqLearner {
 
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("hours")
+    @SerializedName("score")
     @Expose
-    private Integer hours;
+    private Integer score;
     @SerializedName("country")
     @Expose
     private String country;
@@ -26,15 +26,28 @@ public class Learner {
         this.name = name;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public String getCountry() {
         return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getBadgeUrl() {
         return badgeUrl;
     }
 
-    public Integer getHours() {
-        return hours;
+    public void setBadgeUrl(String badgeUrl) {
+        this.badgeUrl = badgeUrl;
     }
+
 }

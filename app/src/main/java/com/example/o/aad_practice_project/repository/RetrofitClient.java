@@ -9,8 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitClient {
 
-    //public static final String BASE_URL = BuildConfig.BASE_URL;
-    public static final String BASE_URL = "https://gadsapi.herokuapp.com/api/v1/";
+    public static final String BASE_URL = "https://gadsapi.herokuapp.com/api/";
 
     // volatile keyword ensures that all threads use the same object that is in main memory
     private static volatile RetrofitClient mRetrofitClient = null;
@@ -18,8 +17,7 @@ public class RetrofitClient {
     private OkHttpClient.Builder httpClientBuilder;
 
     /**
-     * private constructor for the Singleton design pattern it initializes all requests' needed
-     * headers and caching policy
+     * private constructor for the Singleton design pattern
      */
     private RetrofitClient() {
         httpClientBuilder = new OkHttpClient.Builder();
