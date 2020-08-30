@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="20dp"
+    android:padding="10dp">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/submission_cancel_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/cornered_button"
+        android:contentDescription="@string/cancel_button"
+        android:src="@drawable/ic_cancel" />
+
+    <TextView
+        android:id="@+id/alert_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submission_cancel_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="40dp"
+        android:padding="10dp"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/submission_yes_button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/alert_message"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="50dp"
+        android:background="@drawable/cornered_button_outlined"
+        android:text="@string/yes"
+        android:textAllCaps="false"
+        android:textColor="@color/golden_orange"
+        android:textSize="25sp" />
+
+
+</RelativeLayout>
