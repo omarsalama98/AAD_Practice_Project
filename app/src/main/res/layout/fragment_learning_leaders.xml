@@ -4,6 +4,7 @@
     android:id="@+id/learning_leaders_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".fragments.LearningLeadersFragment">
 
 </androidx.recyclerview.widget.RecyclerView>
