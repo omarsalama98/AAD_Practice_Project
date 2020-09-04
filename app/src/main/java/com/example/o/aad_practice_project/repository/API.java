@@ -15,4 +15,5 @@ public interface API {
 
     @GET("skilliq")
     Call<List<SkillIqLearner>> getSkillIq();
+
 }
