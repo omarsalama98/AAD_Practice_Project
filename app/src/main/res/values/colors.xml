@@ -6,6 +6,8 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="golden_orange">#FFAE45</color>
+    <color name="dark_golden_orange">#FD8F00</color>
+    <color name="light_golden_orange">#FFCF90</color>
     <color name="red">#FF0000</color>
 
 </resources>

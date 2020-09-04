@@ -34,11 +34,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/project_submission"
         android:textColor="@color/golden_orange"
         android:textSize="26sp"
         android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@drawable/gradient_underline" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@drawable/gradient_underline"
+            android:rotation="180" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,8 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginVertical="20dp"
-        android:background="@drawable/cornered_button"
-        android:backgroundTint="@color/golden_orange"
+        android:background="@drawable/cornered_button_gradient"
         android:paddingHorizontal="40dp"
         android:text="@string/submit"
         android:textAllCaps="false"
