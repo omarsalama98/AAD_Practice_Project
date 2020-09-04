@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,7 @@ class LearningLeadersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val progressBar = view.findViewById<ProgressBar>(R.id.learning_leaders_progress_bar)
         val mLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         val mRecyclerView = view.findViewById<RecyclerView>(R.id.learning_leaders_recycler_view)
         val mAdapter = LearningLeadersListAdapter(learningLeadersList)
@@ -49,6 +51,7 @@ class LearningLeadersFragment : Fragment() {
                     if (response != null) {
                         learningLeadersList.addAll(response.body())
                         mAdapter.notifyDataSetChanged()
+                        progressBar.visibility = View.GONE
                         fetchedRequests = true
                     }
                 }
@@ -56,6 +59,8 @@ class LearningLeadersFragment : Fragment() {
                 override fun onFailure(call: Call<List<Learner>>?, t: Throwable?) {
                 }
             })
+        } else {
+            progressBar.visibility = View.GONE
         }
     }
 }

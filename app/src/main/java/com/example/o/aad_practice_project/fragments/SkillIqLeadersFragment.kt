@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,10 +27,15 @@ class SkillIqLeadersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_skill_iq_leaders, container, false)
+        return inflater.inflate(R.layout.fragment_skill_iq_leaders, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val progressBar = view.findViewById<ProgressBar>(R.id.skill_iq_leaders_progress_bar)
         val mLayoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
-        val mRecyclerView = root.findViewById<RecyclerView>(R.id.skill_iq_leaders_recycler_view)
+        val mRecyclerView = view.findViewById<RecyclerView>(R.id.skill_iq_leaders_recycler_view)
         val mAdapter = SkillIqLeadersListAdapter(skillIqList)
 
         mRecyclerView.adapter = mAdapter
@@ -45,6 +51,7 @@ class SkillIqLeadersFragment : Fragment() {
                     if (response != null) {
                         skillIqList.addAll(response.body())
                         mAdapter.notifyDataSetChanged()
+                        progressBar.visibility = View.GONE
                         fetchedRequests = true
                     }
                 }
@@ -52,9 +59,9 @@ class SkillIqLeadersFragment : Fragment() {
                 override fun onFailure(call: Call<List<SkillIqLearner>>?, t: Throwable?) {
                 }
             })
+        } else {
+            progressBar.visibility = View.GONE
         }
-
-        return root
     }
 
 }
