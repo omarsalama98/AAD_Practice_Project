@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import com.example.o.aad_practice_project.repository.SubmissionAPI
 import com.example.o.aad_practice_project.repository.SubmissionRetrofitClient
@@ -29,8 +28,9 @@ class SubmissionActivity : AppCompatActivity() {
         val emailAddressEditText = findViewById<EditText>(R.id.email_address_edit_text)
         val githubLinkEditText = findViewById<EditText>(R.id.github_link_edit_text)
         val submitButton = findViewById<Button>(R.id.submission_submit_button)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        findViewById<ImageView>(R.id.submission_back_arrow).setOnClickListener {
+            onBackPressed()
+        }
 
         submitButton.setOnClickListener {
 

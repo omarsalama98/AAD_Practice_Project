@@ -18,6 +18,7 @@
     <string name="success">Green Tick</string>
     <string name="submission_successful">Submission Successful</string>
     <string name="submission_failed">Submission not Successful</string>
-    <string name="submitting">Submitting...\nPlease wait</string>
+    <string name="submitting">Submitting...</string>
+    <string name="back_arrow">back arrow</string>
 
 </resources>
