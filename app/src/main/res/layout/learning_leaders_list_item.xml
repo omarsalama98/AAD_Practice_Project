@@ -13,6 +13,7 @@
         android:weightSum="100">
 
         <ImageView
+            android:id="@+id/learning_leaders_list_item_image"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="30"

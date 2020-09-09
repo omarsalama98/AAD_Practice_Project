@@ -3,10 +3,12 @@ package com.example.o.aad_practice_project.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.o.aad_practice_project.R
 import com.example.o.aad_practice_project.model.Learner
+import com.squareup.picasso.Picasso
 
 class LearningLeadersListAdapter(private val learners: ArrayList<Learner>) :
     RecyclerView.Adapter<LearningLeadersListAdapter.ViewHolder>() {
@@ -26,7 +28,8 @@ class LearningLeadersListAdapter(private val learners: ArrayList<Learner>) :
         val mDetails: String =
             learners[position].hours.toString() + " learning hours, " + learners[position].country
         holder.details.text = mDetails
-
+        Picasso.get().load(learners[position].badgeUrl).placeholder(R.drawable.top_learner)
+            .into(holder.badge)
     }
 
     override fun getItemCount(): Int {
@@ -36,5 +39,6 @@ class LearningLeadersListAdapter(private val learners: ArrayList<Learner>) :
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var name: TextView = v.findViewById(R.id.learning_leaders_list_item_name)
         var details: TextView = v.findViewById(R.id.learning_leaders_list_item_details)
+        var badge: ImageView = v.findViewById(R.id.learning_leaders_list_item_image)
     }
 }
