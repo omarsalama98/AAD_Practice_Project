@@ -36,40 +36,28 @@ class SubmissionActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
 
-            val mAlert = AlertDialog.Builder(this).create()
-            val mView = layoutInflater.inflate(R.layout.alert_dialog, null)
-            mAlert.setView(mView)
-            mAlert.setCancelable(true)
-            mAlert.window?.setBackgroundDrawable(
+            val confirmationAlertDialog = AlertDialog.Builder(this).create()
+            val confirmationView = layoutInflater.inflate(R.layout.alert_dialog, null)
+            confirmationAlertDialog.setView(confirmationView)
+            confirmationAlertDialog.setCancelable(true)
+            confirmationAlertDialog.window?.setBackgroundDrawable(
                 ResourcesCompat.getDrawable(resources, R.drawable.cornered_button, null)
             )
-
-            mView.findViewById<TextView>(R.id.alert_message)?.text =
+            confirmationView.findViewById<TextView>(R.id.alert_message)?.text =
                 getString(R.string.are_you_sure_msg)
-            mView.findViewById<ImageView>(R.id.submission_cancel_button)?.setOnClickListener {
-                mAlert.dismiss()
-            }
-            mView.findViewById<Button>(R.id.submission_yes_button)?.setOnClickListener {
-                mAlert.dismiss()
+            confirmationView.findViewById<ImageView>(R.id.submission_cancel_button)
+                ?.setOnClickListener {
+                    confirmationAlertDialog.dismiss()
+                }
 
-                val mLoadingAlertMessage = AlertDialog.Builder(this).create()
-                val mMessageView = layoutInflater.inflate(R.layout.alert_message, null)
-                mLoadingAlertMessage.setView(mMessageView)
-                mLoadingAlertMessage.window?.setBackgroundDrawable(
-                    ResourcesCompat.getDrawable(resources, R.drawable.cornered_button, null)
+            confirmationView.findViewById<Button>(R.id.submission_yes_button)?.setOnClickListener {
+                confirmationAlertDialog.dismiss()
+                val submittingAlertMessage = AlertDialog.Builder(this).create()
+                AlertDialogHelper.setupAlertDialog(
+                    layoutInflater, submittingAlertMessage,
+                    this, AlertDialogHelper.ON_SUBMITTING
                 )
-                mMessageView.findViewById<TextView>(R.id.submission_response_message)?.text =
-                    getString(R.string.submitting)
-                mMessageView.findViewById<ImageView>(R.id.submission_response_image)
-                    ?.setImageDrawable(
-                        ResourcesCompat.getDrawable(
-                            resources,
-                            R.drawable.gads_logo,
-                            null
-                        )
-                    )
-                mLoadingAlertMessage.show()
-
+                submittingAlertMessage.show()
                 val mCall: Call<Void> = api.submit(
                     submissionUrl,
                     emailAddressEditText.text.toString(), firstNameEditText.text.toString(),
@@ -79,46 +67,25 @@ class SubmissionActivity : AppCompatActivity() {
                 mCall.enqueue(object : Callback<Void> {
                     override fun onResponse(call: Call<Void>?, response: Response<Void>?) {
                         if (response != null) {
-                            if (mLoadingAlertMessage.isShowing)
-                                mLoadingAlertMessage.dismiss()
+                            if (submittingAlertMessage.isShowing)
+                                submittingAlertMessage.dismiss()
                             val mAlertMessage =
                                 AlertDialog.Builder(this@SubmissionActivity).create()
-                            val messageView = layoutInflater.inflate(R.layout.alert_message, null)
-                            mAlertMessage.setView(messageView)
-                            mAlertMessage.window?.setBackgroundDrawable(
-                                ResourcesCompat.getDrawable(
-                                    resources,
-                                    R.drawable.cornered_button,
-                                    null
-                                )
-                            )
                             if (response.isSuccessful) {
-                                messageView.findViewById<TextView>(R.id.submission_response_message)?.text =
-                                    getString(R.string.submission_successful)
-                                messageView.findViewById<ImageView>(R.id.submission_response_image)
-                                    ?.setImageDrawable(
-                                        ResourcesCompat.getDrawable(
-                                            resources,
-                                            R.drawable.successful_icon,
-                                            null
-                                        )
-                                    )
+                                AlertDialogHelper.setupAlertDialog(
+                                    layoutInflater, mAlertMessage,
+                                    this@SubmissionActivity, AlertDialogHelper.ON_SUCCESS
+                                )
                                 mAlertMessage.show()
                                 Handler().postDelayed({
                                     mAlertMessage.dismiss()
                                     finish()
                                 }, 3000)
                             } else {
-                                messageView.findViewById<TextView>(R.id.submission_response_message)?.text =
-                                    getString(R.string.submission_failed)
-                                messageView.findViewById<ImageView>(R.id.submission_response_image)
-                                    ?.setImageDrawable(
-                                        ResourcesCompat.getDrawable(
-                                            resources,
-                                            R.drawable.failed_icon,
-                                            null
-                                        )
-                                    )
+                                AlertDialogHelper.setupAlertDialog(
+                                    layoutInflater, mAlertMessage,
+                                    this@SubmissionActivity, AlertDialogHelper.ON_FAILURE
+                                )
                                 mAlertMessage.show()
                                 Handler().postDelayed({
                                     mAlertMessage.dismiss()
@@ -129,30 +96,18 @@ class SubmissionActivity : AppCompatActivity() {
 
                     override fun onFailure(call: Call<Void>?, t: Throwable?) {
                         val mAlertMessage = AlertDialog.Builder(this@SubmissionActivity).create()
-                        val messageView = layoutInflater.inflate(R.layout.alert_message, null)
-                        mAlertMessage.setView(messageView)
-                        mAlertMessage.window?.setBackgroundDrawable(
-                            ResourcesCompat.getDrawable(resources, R.drawable.cornered_button, null)
+                        AlertDialogHelper.setupAlertDialog(
+                            layoutInflater, mAlertMessage,
+                            this@SubmissionActivity, AlertDialogHelper.ON_FAILURE
                         )
-                        messageView.findViewById<TextView>(R.id.submission_response_message)?.text =
-                            getString(R.string.submission_failed)
-                        messageView.findViewById<ImageView>(R.id.submission_response_image)
-                            ?.setImageDrawable(
-                                ResourcesCompat.getDrawable(
-                                    resources,
-                                    R.drawable.failed_icon,
-                                    null
-                                )
-                            )
                         mAlertMessage.show()
                         Handler().postDelayed({
                             mAlertMessage.dismiss()
                         }, 3000)
                     }
-
                 })
             }
-            mAlert.show()
+            confirmationAlertDialog.show()
         }
     }
 
