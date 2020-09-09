@@ -1,6 +1,7 @@
 package com.example.o.aad_practice_project.repository;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -15,12 +16,13 @@ public class RetrofitClient {
     private static volatile RetrofitClient mRetrofitClient = null;
     private Retrofit.Builder retrofitBuilder;
     private OkHttpClient.Builder httpClientBuilder;
+    private static HttpLoggingInterceptor logger = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
 
     /**
      * private constructor for the Singleton design pattern
      */
     private RetrofitClient() {
-        httpClientBuilder = new OkHttpClient.Builder();
+        httpClientBuilder = new OkHttpClient.Builder().addInterceptor(logger);
 
         retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)

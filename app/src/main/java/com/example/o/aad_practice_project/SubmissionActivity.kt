@@ -9,15 +9,17 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.example.o.aad_practice_project.repository.RetrofitClient
 import com.example.o.aad_practice_project.repository.SubmissionAPI
-import com.example.o.aad_practice_project.repository.SubmissionRetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class SubmissionActivity : AppCompatActivity() {
 
-    private val api = SubmissionRetrofitClient.getInstance().getAPI(SubmissionAPI::class.java)
+    private val api = RetrofitClient.getInstance().getAPI(SubmissionAPI::class.java)
+    private val submissionUrl =
+        "https://docs.google.com/forms/d/e/1FAIpQLSf9d1TcNU6zc6KR8bSEM41Z1g1zl35cwZr2xyjIhaMAz8WChQ/formResponse"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +71,7 @@ class SubmissionActivity : AppCompatActivity() {
                 mLoadingAlertMessage.show()
 
                 val mCall: Call<Void> = api.submit(
+                    submissionUrl,
                     emailAddressEditText.text.toString(), firstNameEditText.text.toString(),
                     lastNameEditText.text.toString(), githubLinkEditText.text.toString()
                 )
